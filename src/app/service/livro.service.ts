@@ -11,13 +11,14 @@ export class LivroService {
   private readonly API = 'https://www.googleapis.com/books/v1/volumes';
   constructor(private https: HttpClient) { }
 
-  buscar(valorDigitado: string): Observable<Item[]>{
+  buscar(valorDigitado: string): Observable<LivrosResultado>{
     const params = new HttpParams().append('q',valorDigitado);
-    return this.https.get<LivrosResultado>(this.API, {params}).pipe(
+    return this.https.get<LivrosResultado>(this.API, {params})
+    //.pipe(
       //tap(retornoAPI => console.log('Fluxo do TAP', retornoAPI)),
-      map(resultado => resultado.items),
+      //map(resultado => resultado.items ?? []),
       //tap(resultado => console.log('Fluxo após o map', resultado))
-    )
+    //)
   }
 
 }
